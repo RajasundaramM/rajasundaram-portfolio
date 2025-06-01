@@ -1,0 +1,61 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+name: Deploy Jekyll site to Pages
+
+on:
+  # Runs on pushes targeting the default branch (e.g., 'main' or 'master')
+  push:
+    branches: ["main"] # <--- IMPORTANT: Ensure this matches your repository's default branch.
+
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the start and latest queued.
+# This prevents multiple builds from conflicting.
+concurrency:
+  group: "github-pages"
+  cancel-in-progress: true
+
+jobs:
+  # 'build' job: This job builds your Jekyll site.
+  build:
+    runs-on: ubuntu-latest # Specifies the operating system for the runner.
+    steps:
+      - name: Checkout # Checks out your repository code.
+        uses: actions/checkout@v4
+      - name: Setup Ruby # Sets up the Ruby environment.
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1" # <--- IMPORTANT: Use a Ruby version compatible with Jekyll 4.x. Ruby 3.1 is generally a safe choice for this.
+          bundler-cache: true # Installs dependencies from your Gemfile.lock (crucial!).
+      - name: Build with Jekyll # Builds your Jekyll site using the installed gems.
+        uses: actions/jekyll-build-pages@v1 # This is the action that handles the Jekyll build process.
+        with:
+          source: ./ # The directory containing your Jekyll source files (the root of your repo).
+          destination: ./_site # The output directory for the built site (this is what GitHub Pages serves).
+      - name: Upload artifact # Uploads the built site as an artifact for the deployment job.
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site # The path to the built site directory.
+
+  # 'deploy' job: This job deploys the built site to GitHub Pages.
+  deploy:
+    environment:
+      name: github-pages # The environment name for GitHub Pages.
+      url: ${{ steps.deployment.outputs.page_url }} # The URL where the site will be deployed.
+    runs-on: ubuntu-latest # Specifies the operating system for the runner.
+    needs: build # Ensures this job only runs after the 'build' job completes successfully.
+    steps:
+      - name: Deploy to GitHub Pages # Deploys the artifact to GitHub Pages.
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -16,23 +16,16 @@
 ###### From Gemini
 source "https://rubygems.org"
 
-gem "jekyll"
-gem "jekyll-theme-chirpy"
+gem "jekyll", "~> 4.3" # Explicitly specify Jekyll 4.3 or compatible version for Chirpy
+gem "jekyll-theme-chirpy", "~> 5.4" # Or whatever the latest version of Chirpy is you want to use
+                                 # Chirpy's readme/docs usually recommend a specific version.
+                                 # Example: "gem "jekyll-theme-chirpy", "~> 5.4""
 
-# If you use any other plugins that are not part of GitHub Pages' default gems
-# (like jekyll-archives or jekyll-seo-tag if they are not included in the Chirpy theme's dependencies)
-# you'll need to list them here too.
-# Example:
+# Add other Chirpy-specific dependencies if its documentation lists them
+# For example, if Chirpy requires jekyll-feed, jekyll-sitemap, jekyll-seo-tag directly:
 # gem "jekyll-feed"
 # gem "jekyll-sitemap"
 # gem "jekyll-seo-tag"
-# gem "jekyll-archives"
 
-# This gem is required for GitHub Pages to build the site.
-# It ensures Jekyll's version matches GitHub Pages' environment.
-group :jekyll_plugins do
-  gem "github-pages", "~> 232" # Use the version mentioned in the log, or the latest compatible for Chirpy
-end
-
-# If your theme's Gemfile includes this, keep it. Otherwise, you might not need it.
-# gem "webrick", "~> 1.8" # For local development on newer Ruby versions
+# For local development on Ruby 3.x if you get `WEBrick` errors when serving locally:
+gem "webrick", "~> 1.8"
