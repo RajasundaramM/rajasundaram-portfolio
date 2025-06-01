@@ -1,60 +1,80 @@
+# This workflow is for deploying a Jekyll site to GitHub Pages.
+# It ensures a clean environment and correct Ruby version for the build.
 name: Deploy Jekyll site to Pages
 
+# Controls when the workflow will run
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches: ["main"] # Run on pushes to the 'main' branch
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+# Permissions for the GITHUB_TOKEN
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read # Read repository contents
+  pages: write # Write to GitHub Pages
+  id-token: write # Needed for OIDC authentication to GitHub Pages
 
+# Ensures that only one deploy workflow is running at a time
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# Define the build and deploy jobs
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Run on the latest Ubuntu runner
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4 # Checkout the repository code
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Ruby Environment
+        uses: ruby/setup-ruby@v1 # Use the setup-ruby action to configure Ruby
         with:
-          ruby-version: "3.3" # Confirm this is '3.3' or '3.2'
-          # Temporarily disable bundler-cache to force clean install
-          # bundler-cache: true # <--- COMMENT OUT OR REMOVE THIS LINE
+          ruby-version: "3.3" # CRITICAL: Ensure Ruby 3.3 is used for the build
+          bundler-cache:
+            false # CRITICAL: Disable cache to force a fresh bundle install every time.
+            # This helps prevent issues from stale or corrupted caches.
 
-      - name: Clean Bundler Environment (Extra Precaution)
+      - name: Verify Ruby Version and Environment
         run: |
-          rm -rf vendor/bundle
-          rm -f Gemfile.lock
-          bundle config --delete path || true # Remove path config if it exists
-          bundle config --delete deployment || true # Remove deployment config if it exists
+          echo "Current Ruby version:"
+          ruby -v
+          echo "Bundler environment:"
+          bundle env
 
-      - name: Install Ruby Dependencies
-        run: bundle install
-
-      - name: Build with Jekyll
+      - name: Perform Clean Bundle Install
         run: |
-          bundle exec jekyll build --source . --destination _site --trace # <--- ADD --trace
-          ls -R _site
+          echo "Attempting to clean existing bundle directories..."
+          rm -rf vendor/bundle || true # Remove existing vendor/bundle if it exists
+          rm -f Gemfile.lock || true   # Remove existing Gemfile.lock
+          bundle config --delete path || true # Remove any old bundle path configurations
+          bundle config --delete deployment || true # Remove any old bundle deployment configurations
+          echo "Running bundle install to fetch dependencies..."
+          bundle install --jobs 4 --retry 3 # Install gems with 4 parallel jobs and 3 retries
+          echo "Bundle install complete. Listing installed gems:"
+          bundle list
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Build Jekyll Site
+        run: |
+          echo "Starting Jekyll build with trace..."
+          bundle exec jekyll build --source . --destination _site --trace # Build the Jekyll site, include --trace for verbose errors
+          echo "Jekyll build finished. Listing _site directory contents:"
+          ls -R _site # List the contents of the built site directory
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3 # Upload the _site directory as an artifact for deployment
         with:
           path: ./_site
 
   deploy:
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
+      name: github-pages # Target the GitHub Pages environment
+      url: ${{ steps.deployment.outputs.page_url }} # Get the deployed URL
+    runs-on: ubuntu-latest # Run on the latest Ubuntu runner
+    needs: build # This job depends on the 'build' job completing successfully
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4 # Deploy the artifact to GitHub Pages
