@@ -1,1 +1,38 @@
+---
+layout: page
+---
+<article class="px-1">
+  <div class="education-entry-header">
+    <h1 class="education-title">{{ page.title }}</h1>
+    <p class="education-period">{{ page.period }}</p>
+    <p class="education-institution">{{ page.institution }}</p>
+    <p class="education-degree">{{ page.degree }}</p>
+  </div>
 
+  <div class="education-content e-content">
+    {{ content }}
+  </div>
+
+  {% if page.coursework or page.activities %}
+  <div class="education-details mt-4">
+    {% if page.coursework %}
+    <h3 class="fw-bold">Key Coursework:</h3>
+    <ul class="list-unstyled">
+      {% for course in page.coursework %}
+        <li><i class="fas fa-check-circle me-2"></i>{{ course }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if page.activities %}
+    <h3 class="fw-bold mt-3">Activities & Honors:</h3>
+    <ul class="list-unstyled">
+      {% for activity in page.activities %}
+        <li><i class="fas fa-medal me-2"></i>{{ activity }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endif %}
+
+</article>
