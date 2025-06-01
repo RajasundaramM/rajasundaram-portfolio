@@ -39,7 +39,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2" # Keep this at '3.1' or '3.2'
+          ruby-version: "3.3" # Keep this at '3.1' or '3.2'
           bundler-cache: true # This still ensures your gems are installed from Gemfile.lock
       - name: Build with Jekyll # <--- IMPORTANT CHANGE STARTS HERE!
         run: |
