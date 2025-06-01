@@ -9,22 +9,22 @@ tagline: Robotics • Perception • AI
 description: >-
   Portfolio of a robotics engineer passionate about autonomy, perception, and intelligent systems.
 url: "https://rajasundaramm.github.io"
-baseurl: "/rajasundaram-portfolio" # don’t include trailing slash in url
+baseurl: "/rajasundaram-portfolio" # IMPORTANT: Ensure this matches your GitHub repository name if it's a project page.
 
-# Author Info
+# Author Info (Used for the sidebar)
 github:
   username: rajasundaramm
 
 social:
-  name: Rajasundaram Mathiazhagan
+  name: Rajasundaram Mathiazhagan # Your name displayed in the sidebar
   email: rm6584@nyu.edu
   links:
     - https://www.linkedin.com/in/rajasundaramm/
     - https://github.com/rajasundaramm
 
 # Avatar and Preview Image
-avatar: "/assets/img/profile.jpg"  # upload your image to /assets/img/ and use that path
-social_preview_image: "/assets/img/preview.png"  # optional
+avatar: "/assets/img/profile.jpg"  # Upload your profile picture here (e.g., profile.jpg)
+social_preview_image: "/assets/img/preview.png"  # Optional: For social media previews
 
 # Appearance
 theme_mode: light  # options: light, dark, or leave blank for auto-switch
@@ -46,15 +46,27 @@ pwa:
 comments:
   provider:
 
-# Posts
-paginate: 10
-toc: true
+# Posts (Generally not used for a pure portfolio, but keep if you plan a blog)
+paginate: 0 # Set to 0 to disable pagination for posts if not blogging
+toc: true   # Enable Table of Contents for long pages/projects
 
-# Collections for vertical tabs
+# Collections for vertical tabs and content
 collections:
   tabs:
     output: true
     sort_by: order
+  education: # NEW: Collection for education entries
+    output: true
+    permalink: /education/:title/ # Or /education/:name/
+    sort_by: order # To sort entries by order
+  projects: # NEW: Collection for projects
+    output: true
+    permalink: /projects/:name/ # e.g., /projects/my-robot-project/
+    sort_by: order # To sort projects within their categories
+  experience: # NEW: Collection for experience entries
+    output: true
+    permalink: /experience/:name/ # e.g., /experience/my-internship/
+    sort_by: order # To sort experiences by order
 
 defaults:
   - scope:
@@ -62,10 +74,28 @@ defaults:
       type: tabs
     values:
       layout: page
-      permalink: /:title/
+      permalink: /:title/ # e.g., /about-me/, /education/, /projects/, /experience/
   - scope:
       path: ""
-      type: posts
+      type: education # Default layout for education entries
+    values:
+      layout: education_entry # You'll create _layouts/education_entry.html
+      comments: false
+  - scope:
+      path: ""
+      type: projects # Default layout for individual project pages (though we'll link directly to GitHub)
+    values:
+      layout: project_tile # You'll create _layouts/project_tile.html (though it might be rendered on the projects page)
+      comments: false
+  - scope:
+      path: ""
+      type: experience # Default layout for individual experience pages
+    values:
+      layout: experience_entry # You'll create _layouts/experience_entry.html
+      comments: false
+  - scope:
+      path: ""
+      type: posts # Keep if you plan a blog, otherwise this block can be removed
     values:
       layout: post
       toc: true
@@ -88,16 +118,6 @@ compress_html:
 
 # SEO
 webmaster_verifications: {}
-
-# Jekyll Archives (optional)
-jekyll-archives:
-  enabled: [categories, tags]
-  layouts:
-    category: category
-    tag: tag
-  permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
 
 # Exclude files from the build
 exclude:
