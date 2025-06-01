@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 # Jekyll and the Chirpy theme
 gem "jekyll", "~> 4.4" # Target Jekyll 4.4.x specifically, as that's what's often installed.
-gem "jekyll-theme-chirpy", "~> 5.6" # Use the specific version you're using, or a recent one like "~> 7.x" if you've updated.
+gem "jekyll-theme-chirpy", "~> 7.3" # Use the specific version you're using, or a recent one like "~> 7.x" if you've updated.
 
 # Core Jekyll Plugins often used by themes or GitHub Pages
 gem "jekyll-feed", "~> 0.16" # Provides an Atom/RSS feed
