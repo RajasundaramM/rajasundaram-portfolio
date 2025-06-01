@@ -2,3 +2,54 @@
 ---
 
 @import 'chirpy-theme-base';
+/* Custom styles for profile picture alignment */
+.profile-img-container {
+  text-align: center; /* Ensures content (like image) inside is centered */
+}
+
+.profile-img {
+  display: block; /* Makes the image a block element */
+  margin-left: auto; /* Centers the block element horizontally */
+  margin-right: auto; /* Centers the block element horizontally */
+  border-radius: 50%; /* Just to ensure it's round if not already */
+}
+
+/* Custom styles for Home Page Cover Photo */
+.home-cover {
+  height: 100vh; /* Make it full viewport height */
+  width: 100%;
+  background-size: cover; /* Cover the entire area */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  display: flex; /* Use flexbox to center content vertically/horizontally */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  color: white; /* Text color for content over the image */
+  text-align: center;
+  position: relative; /* For overlay if needed */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.home-cover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+  z-index: 1; /* Place overlay above background image */
+}
+
+.home-cover-content {
+  position: relative; /* Place content above the overlay */
+  z-index: 2;
+  padding: 20px;
+}
+
+/* Optional: Adjust for smaller screens */
+@media (max-width: 768px) {
+  .home-cover {
+    height: 70vh; /* Adjust height for smaller screens */
+  }
+}
