@@ -5,7 +5,7 @@ name: Deploy Jekyll site to Pages
 # Controls when the workflow will run
 on:
   push:
-    branches: ["main"] # Run on pushes to the 'main' branch
+    branches: ["master"] # Run on pushes to the 'main' branch
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 # Permissions for the GITHUB_TOKEN
