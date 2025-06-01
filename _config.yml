@@ -23,16 +23,16 @@ social:
     - https://github.com/rajasundaramm
 
 # Avatar and Preview Image
-avatar: "/assets/img/profile.jpg"  # Upload your profile picture here (e.g., profile.jpg)
-social_preview_image: "/assets/img/preview.png"  # Optional: For social media previews
+avatar: "/assets/img/profile.jpg" # Upload your profile picture here (e.g., profile.jpg)
+social_preview_image: "/assets/img/preview.png" # Optional: For social media previews
 
 # Appearance
-theme_mode: light  # options: light, dark, or leave blank for auto-switch
+theme_mode: light # options: light, dark, or leave blank for auto-switch
 
 # Analytics (optional)
 analytics:
   google:
-    id: ""  # Add your GA tag if needed
+    id: "" # Add your GA tag if needed
 
 # PWA (Progressive Web App)
 pwa:
@@ -48,7 +48,7 @@ comments:
 
 # Posts (Generally not used for a pure portfolio, but keep if you plan a blog)
 paginate: 0 # Set to 0 to disable pagination for posts if not blogging
-toc: true   # Enable Table of Contents for long pages/projects
+toc: true # Enable Table of Contents for long pages/projects
 
 # Collections for vertical tabs and content
 collections:
@@ -129,3 +129,10 @@ exclude:
   - vendor
   - package*.json
   - "*.config.js"
+
+# _config.yml (partial)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-include-cache # <--- ENSURE THIS LINE IS PRESENT

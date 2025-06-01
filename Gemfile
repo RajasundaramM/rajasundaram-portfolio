@@ -26,6 +26,6 @@ gem "jekyll-theme-chirpy", "~> 5.6" # Or whatever the latest version of Chirpy i
 # gem "jekyll-feed"
 # gem "jekyll-sitemap"
 # gem "jekyll-seo-tag"
-
+gem "jekyll-include-cache", "~> 0.2"
 # For local development on Ruby 3.x if you get `WEBrick` errors when serving locally:
 gem "webrick", "~> 1.8"
