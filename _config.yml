@@ -135,4 +135,6 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-include-cache # <--- ENSURE THIS LINE IS PRESENT
+  - jekyll-include-cache
+  - jekyll-archives
+  - jekyll-paginate # <--- ENSURE THIS LINE IS PRESENT

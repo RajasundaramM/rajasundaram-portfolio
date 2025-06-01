@@ -1,31 +1,20 @@
-# frozen_string_literal: true
-
-#source "https://rubygems.org"
-
-#gemspec
-
-#gem "html-proofer", "~> 5.0", group: :test
-
-#platforms :mingw, :x64_mingw, :mswin, :jruby do
-#  gem "tzinfo", ">= 1", "< 3"
-#  gem "tzinfo-data"
-#end
-
-#gem "wdm", "~> 0.2.0", :platforms => [:mingw, :x64_mingw, :mswin]
-
-###### From Gemini
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3" # Explicitly specify Jekyll 4.3 or compatible version for Chirpy
-gem "jekyll-theme-chirpy", "~> 5.6" # Or whatever the latest version of Chirpy is you want to use
-                                 # Chirpy's readme/docs usually recommend a specific version.
-                                 # Example: "gem "jekyll-theme-chirpy", "~> 5.4""
+# Jekyll and the Chirpy theme
+gem "jekyll", "~> 4.4" # Target Jekyll 4.4.x specifically, as that's what's often installed.
+gem "jekyll-theme-chirpy", "~> 5.6" # Use the specific version you're using, or a recent one like "~> 7.x" if you've updated.
 
-# Add other Chirpy-specific dependencies if its documentation lists them
-# For example, if Chirpy requires jekyll-feed, jekyll-sitemap, jekyll-seo-tag directly:
-# gem "jekyll-feed"
-# gem "jekyll-sitemap"
-# gem "jekyll-seo-tag"
-gem "jekyll-include-cache", "~> 0.2"
+# Core Jekyll Plugins often used by themes or GitHub Pages
+gem "jekyll-feed", "~> 0.16" # Provides an Atom/RSS feed
+gem "jekyll-sitemap", "~> 1.4" # Generates a sitemap.xml
+gem "jekyll-seo-tag", "~> 2.8" # Adds SEO metadata to your site
+gem "jekyll-include-cache", "~> 0.2" # Enables the 'include_cached' tag
+
+# Additional plugins the Chirpy theme might explicitly require (or use implicitly)
+# These were found in Chirpy's runtime dependencies on RubyGems:
+gem "jekyll-archives", "~> 2.2" # For creating archive pages (by year, month, etc.)
+gem "jekyll-paginate", "~> 1.1" # For pagination on blog posts (if index.html has pagination setup)
+# gem "jekyll-redirect-from", "~> 0.16" # Chirpy might use this for redirects if you define them. Add if needed.
+
 # For local development on Ruby 3.x if you get `WEBrick` errors when serving locally:
 gem "webrick", "~> 1.8"
