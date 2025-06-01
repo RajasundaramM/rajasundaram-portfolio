@@ -1,1 +1,26 @@
+---
+layout: page
+---
+<article class="px-1">
+  <div class="experience-entry-header">
+    <h1 class="experience-title">{{ page.title }}</h1>
+    <p class="experience-period">{{ page.period }}</p>
+    <p class="experience-company">{{ page.company }}</p>
+    <p class="experience-location">{{ page.location }}</p>
+  </div>
 
+  <div class="experience-content e-content">
+    {{ content }}
+  </div>
+
+  {% if page.responsibilities %}
+  <div class="experience-details mt-4">
+    <h3 class="fw-bold">Key Responsibilities & Achievements:</h3>
+    <ul class="list-unstyled">
+      {% for resp in page.responsibilities %}
+        <li><i class="fas fa-briefcase me-2"></i>{{ resp }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</article>
