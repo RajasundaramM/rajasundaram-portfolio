@@ -1,38 +1,52 @@
-# Theme and Language
-theme: jekyll-theme-chirpy
-lang: en
-timezone: America/New_York
+# ==============================================================================
+# Jekyll Configuration File for Chirpy Theme
+# ==============================================================================
 
-# Site Identity
+# ------------------------------------------------------------------------------
+# Theme and Language Settings
+# ------------------------------------------------------------------------------
+theme: jekyll-theme-chirpy # IMPORTANT: This must be present for Jekyll to find theme assets
+lang: en # Site language code (e.g., 'en', 'zh', 'fr')
+timezone: America/New_York # Set your site's timezone (e.g., 'Asia/Kolkata', 'Europe/Paris')
+
+# ------------------------------------------------------------------------------
+# Site Identity and SEO
+# ------------------------------------------------------------------------------
 title: Rajasundaram Mathiazhagan
 tagline: Robotics • Perception • AI
 description: >-
   Portfolio of a robotics engineer passionate about autonomy, perception, and intelligent systems.
-url: "https://rajasundaramm.github.io"
-baseurl: "/rajasundaram-portfolio" # IMPORTANT: Ensure this matches your GitHub repository name if it's a project page.
+url: "https://rajasundaramm.github.io" # Your GitHub Pages URL (e.g., "https://username.github.io")
+baseurl:
+  "/rajasundaram-portfolio" # Your repository name if it's a project page (e.g., "/my-repo")
+  # Leave blank ("") if it's a user/organization page (username.github.io)
 
-# Author Info (Used for the sidebar)
+# ------------------------------------------------------------------------------
+# Author Information (Used for the sidebar and metadata)
+# ------------------------------------------------------------------------------
 github:
-  username: rajasundaramm
+  username: rajasundaramm # Your GitHub username
 
 social:
-  name: Rajasundaram Mathiazhagan # Your name displayed in the sidebar
+  name: Rajasundaram Mathiazhagan # Your full name displayed in the sidebar
   email: rm6584@nyu.edu
   links:
-    - https://www.linkedin.com/in/rajasundaramm/
-    - https://github.com/rajasundaramm
+    - https://www.linkedin.com/in/rajasundaramm/ # LinkedIn profile link
+    - https://github.com/rajasundaramm # GitHub profile link
 
-# Avatar and Preview Image
-avatar: "/assets/img/profile.jpg" # Upload your profile picture here (e.g., profile.jpg)
-social_preview_image: "/assets/img/preview.png" # Optional: For social media previews
+# Avatar and Social Preview Image
+avatar: "/assets/img/profile.jpg" # Path to your profile picture (e.g., /assets/img/profile.jpg)
+social_preview_image: "/assets/img/preview.png" # Optional: For social media link previews
 
-# Appearance
-theme_mode: light # options: light, dark, or leave blank for auto-switch
+# ------------------------------------------------------------------------------
+# Site Appearance and Features
+# ------------------------------------------------------------------------------
+theme_mode: light # Options: 'light', 'dark', or leave blank for auto-switch based on user's system preferences
 
 # Analytics (optional)
 analytics:
   google:
-    id: "" # Add your GA tag if needed
+    id: "" # Your Google Analytics tracking ID (e.g., "G-XXXXXXXXXX"). Leave blank if not used.
 
 # PWA (Progressive Web App)
 pwa:
@@ -40,34 +54,39 @@ pwa:
   cache:
     enabled: true
     deny_paths:
-      - "/admin"
+      - "/admin" # Paths to exclude from PWA caching
 
-# Comments (disabled for portfolio)
+# Comments (disabled for portfolio based on your config)
 comments:
-  provider:
+  provider: # Leave blank to disable comments
 
-# Posts (Generally not used for a pure portfolio, but keep if you plan a blog)
-paginate: 0 # Set to 0 to disable pagination for posts if not blogging
-toc: true # Enable Table of Contents for long pages/projects
+# Post/Page Settings (Adjust if you plan to add blog posts)
+paginate: 0 # Set to 0 to disable pagination. Set to a number (e.g., 5) to enable pagination for blog posts.
+toc: true # Enable Table of Contents for long pages/posts
 
-# Collections for vertical tabs and content
+# ------------------------------------------------------------------------------
+# Collections for Custom Content (Education, Projects, Experience)
+# ------------------------------------------------------------------------------
 collections:
   tabs:
     output: true
-    sort_by: order
-  education: # NEW: Collection for education entries
+    sort_by: order # Used for sorting tabs (e.g., About, Education, Projects)
+  education: # Custom collection for education entries
     output: true
-    permalink: /education/:title/ # Or /education/:name/
-    sort_by: order # To sort entries by order
-  projects: # NEW: Collection for projects
+    permalink: /education/:title/ # Permalink structure (e.g., /education/nyu-masters/)
+    sort_by: order # Sort education entries (e.g., by chronological order)
+  projects: # Custom collection for project entries
     output: true
-    permalink: /projects/:name/ # e.g., /projects/my-robot-project/
-    sort_by: order # To sort projects within their categories
-  experience: # NEW: Collection for experience entries
+    permalink: /projects/:name/ # Permalink structure (e.g., /projects/my-robot-project/)
+    sort_by: order # Sort project entries
+  experience: # Custom collection for experience entries
     output: true
-    permalink: /experience/:name/ # e.g., /experience/my-internship/
-    sort_by: order # To sort experiences by order
+    permalink: /experience/:name/ # Permalink structure (e.g., /experience/my-internship/)
+    sort_by: order # Sort experience entries
 
+# ------------------------------------------------------------------------------
+# Default Front Matter for Collections (Important for Layouts)
+# ------------------------------------------------------------------------------
 defaults:
   - scope:
       path: ""
@@ -77,36 +96,37 @@ defaults:
       permalink: /:title/ # e.g., /about-me/, /education/, /projects/, /experience/
   - scope:
       path: ""
-      type: education # Default layout for education entries
+      type: education # Default layout for individual education entries
     values:
-      layout: education_entry # You'll create _layouts/education_entry.html
+      layout: education_entry # <<< IMPORTANT: This layout file (_layouts/education_entry.html) MUST EXIST.
       comments: false
   - scope:
       path: ""
-      type: projects # Default layout for individual project pages (though we'll link directly to GitHub)
+      type: projects # Default layout for individual project pages
     values:
-      layout: project_tile # You'll create _layouts/project_tile.html (though it might be rendered on the projects page)
+      layout: project_tile # <<< IMPORTANT: This layout file (_layouts/project_tile.html) MUST EXIST.
       comments: false
   - scope:
       path: ""
       type: experience # Default layout for individual experience pages
     values:
-      layout: experience_entry # You'll create _layouts/experience_entry.html
+      layout: experience_entry # <<< IMPORTANT: This layout file (_layouts/experience_entry.html) MUST EXIST.
       comments: false
   - scope:
       path: ""
-      type: posts # Keep if you plan a blog, otherwise this block can be removed
+      type: posts # Default layout for standard blog posts (if you add a blog later)
     values:
       layout: post
       toc: true
       comments: false
-      permalink: /posts/:title/
+      permalink: /posts/:title/ # e.g., /posts/my-first-post/
 
-# SASS/CSS
+# ------------------------------------------------------------------------------
+# SASS/CSS and HTML Compression
+# ------------------------------------------------------------------------------
 sass:
-  style: compressed
+  style: compressed # Minify CSS files
 
-# HTML Compression
 compress_html:
   clippings: all
   comments: all
@@ -114,27 +134,33 @@ compress_html:
   profile: false
   blanklines: false
   ignore:
-    envs: [development]
+    envs: [development] # Don't compress HTML in development environment
 
-# SEO
-webmaster_verifications: {}
+# ------------------------------------------------------------------------------
+# SEO Webmaster Verifications (for Google, Bing, etc.)
+# ------------------------------------------------------------------------------
+webmaster_verifications: {} # Fill in your verification codes here if needed
 
-# Exclude files from the build
+# ------------------------------------------------------------------------------
+# Files/Directories to Exclude from Build
+# ------------------------------------------------------------------------------
 exclude:
   - "*.gem"
   - "*.gemspec"
   - README.md
   - LICENSE
   - node_modules
-  - vendor
+  - vendor # Excludes the 'vendor' directory where Bundler installs gems
   - package*.json
   - "*.config.js"
 
-# _config.yml (partial)
+# ------------------------------------------------------------------------------
+# Jekyll Plugins (CRITICAL for GitHub Pages deployment)
+# ------------------------------------------------------------------------------
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-include-cache
   - jekyll-archives
-  - jekyll-paginate # <--- ENSURE THIS LINE IS PRESENT
+  - jekyll-paginate # Keep this if you use `paginate` in your config, otherwise remove from Gemfile and here
