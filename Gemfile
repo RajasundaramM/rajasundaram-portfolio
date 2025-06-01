@@ -17,7 +17,7 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3" # Explicitly specify Jekyll 4.3 or compatible version for Chirpy
-gem "jekyll-theme-chirpy", "~> 5.4" # Or whatever the latest version of Chirpy is you want to use
+gem "jekyll-theme-chirpy", "~> 5.6" # Or whatever the latest version of Chirpy is you want to use
                                  # Chirpy's readme/docs usually recommend a specific version.
                                  # Example: "gem "jekyll-theme-chirpy", "~> 5.4""
 
