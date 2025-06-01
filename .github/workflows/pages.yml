@@ -32,9 +32,7 @@ jobs:
         uses: ruby/setup-ruby@v1 # Use the setup-ruby action to configure Ruby
         with:
           ruby-version: "3.3" # CRITICAL: Ensure Ruby 3.3 is used for the build
-          bundler-cache:
-            false # CRITICAL: Disable cache to force a fresh bundle install every time.
-            # This helps prevent issues from stale or corrupted caches.
+          bundler-cache: false # CRITICAL: Disable cache to force a fresh bundle install every time.
 
       - name: Verify Ruby Version and Environment
         run: |
