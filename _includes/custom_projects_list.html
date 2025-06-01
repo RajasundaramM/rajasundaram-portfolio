@@ -1,1 +1,74 @@
+<div class="project-categories">
+  {% assign project_areas = site.projects | group_by: "area" | sort: "name" %}
 
+  {% for area in project_areas %}
+    <h2 class="area-title mb-4 mt-5">{{ area.name | capitalize }}</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% assign sorted_projects = area.items | sort: "order" %}
+      {% for project in sorted_projects %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="stretched-link">
+              {% if project.image %}
+                <img src="{{ project.image | relative_url }}" class="card-img-top" alt="{{ project.title }}" style="object-fit: cover; height: 200px;">
+              {% else %}
+                <img src="{{ '/assets/img/placeholder-project.jpg' | relative_url }}" class="card-img-top" alt="Project Placeholder" style="object-fit: cover; height: 200px;">
+              {% endif %}
+            </a>
+            <div class="card-body">
+              <h5 class="card-title mb-2">{{ project.title }}</h5>
+              {% if project.short_description %}
+                <p class="card-text text-muted">{{ project.short_description }}</p>
+              {% endif %}
+              {% if project.technologies %}
+                <div class="project-tech-tags mt-2">
+                  {% for tech in project.technologies %}
+                    <span class="badge text-bg-secondary me-1 mb-1">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            <div class="card-footer bg-transparent border-top-0 d-flex justify-content-end">
+              <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                <i class="fab fa-github me-1"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .project-categories .area-title {
+    border-bottom: 2px solid var(--main-border-color);
+    padding-bottom: 5px;
+  }
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .card-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .project-tech-tags .badge {
+    font-size: 0.75em;
+    padding: 0.4em 0.6em;
+  }
+  .card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important;
+  }
+  .card-img-top {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+  }
+  .card-footer {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+</style>
