@@ -1,1 +1,49 @@
-html <!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Test Page</title> </head> <body> <h1>Hello from temporary index.html!</h1> <p>If you see this, GitHub Pages is working for index.html.</p> </body> </html>
+---
+layout: page # Use the 'page' layout to get Chirpy's standard styling, header, footer, and sidebar.
+title: Welcome # This will be the title in the browser tab
+permalink: / # This is important to ensure it's served as the root page
+---
+
+<div class="text-center py-5">
+  {% if site.avatar %}
+    <img src="{{ site.avatar | relative_url }}" alt="{{ site.social.name }}" class="img-fluid rounded-circle shadow-lg mb-4" style="width: 200px; height: 200px; object-fit: cover;">
+  {% endif %}
+
+  <h1 class="display-4 fw-bold">{{ site.title }}</h1>
+
+  {% if site.tagline %}
+    <p class="lead text-muted">{{ site.tagline }}</p>
+  {% endif %}
+
+  <p class="mt-4 fs-5">
+    Welcome to my portfolio! I'm a Robotics Engineer passionate about building intelligent autonomous systems.
+    Explore my work in **Robot Perception**, **Control**, and **AI applications**.
+  </p>
+
+  <div class="mt-4">
+    <a href="{{ '/about-me/' | relative_url }}" class="btn btn-primary btn-lg mx-2">
+      <i class="fas fa-user-circle me-2"></i>About Me
+    </a>
+    <a href="{{ '/projects/' | relative_url }}" class="btn btn-secondary btn-lg mx-2">
+      <i class="fas fa-rocket me-2"></i>View Projects
+    </a>
+    </div>
+
+  {% if site.social.links %}
+  <div class="mt-5 social-icons">
+    {% for social_link in site.social.links %}
+      {% assign social_host = social_link | split: '/' | last %}
+      {% if social_host contains "linkedin" %}
+        <a href="{{ social_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-lg mx-1">
+          <i class="fab fa-linkedin fa-2x"></i>
+        </a>
+      {% elsif social_host contains "github" %}
+        <a href="{{ social_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-lg mx-1">
+          <i class="fab fa-github fa-2x"></i>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
