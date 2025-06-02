@@ -1,5 +1,5 @@
 ---
-layout: home # Or 'page' - 'home' is semantically good for a homepage
+layout: page # Or 'page' - 'home' is semantically good for a homepage
 title: Rajasundaram's Robotics Portfolio
 permalink: /
 ---
